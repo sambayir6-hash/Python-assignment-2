@@ -1,0 +1,25 @@
+def find_teammates(num_needed):
+    print(f"Finding {num_needed} teammates...")
+
+def battle_royale():
+    players = int(input("Enter number of players: "))
+    teammates_needed = 3 - players
+    if teammates_needed > 0:
+        find_teammates(teammates_needed)
+    else:
+        print("Team is full!")
+    print("Match starting . . .")
+
+def practice():
+    desired_map = input("Enter desired map: ")
+    print(f"Launching practice on {desired_map}")
+
+def main():
+    mode = input("Select game mode (br/practice): ").strip()
+    if mode == "br":
+        battle_royale()
+    else:
+        practice()
+
+# Run the program
+main()
