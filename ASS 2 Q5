@@ -1,0 +1,42 @@
+class IncompleteDataError(Exception):
+    def __init__(self, line_number):
+        super().__init__(f"Incomplete data at line {line_number}")
+        self.line_number = line_number
+
+def ledger_reader(lines):
+    """Generator that yields lines from a ledger list."""
+    for line_number, line in enumerate(lines, start=1):
+        line = line.strip()
+        if not line:
+            raise IncompleteDataError(line_number)
+        yield line
+
+def main():
+    # Simulated ledger data
+    ledger_data = [
+        "Transaction A: $100",
+        "Transaction B: $200",
+        "",  # This empty line will trigger the error
+        "Transaction C: $300"
+    ]
+
+    reader = ledger_reader(ledger_data)
+
+    while True:
+        try:
+            line = next(reader)
+            print(f"Processing: {line}")
+        except IncompleteDataError as e:
+            print(f"Warning: {e}")
+            choice = input("Resume reading? (y/n): ").strip().lower()
+            if choice == "y":
+                continue
+            else:
+                print("Exiting safely.")
+                break
+        except StopIteration:
+            print("Finished reading ledger.")
+            break
+
+if __name__ == "__main__":
+    main()
