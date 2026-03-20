@@ -1,0 +1,22 @@
+class Dog:
+    def make_sound(self):
+        return "Woof!"
+
+class Cat:
+    def make_sound(self):
+        return "Meow!"
+
+def process_sound(sound_object):
+    # No need to check type — just call the method
+    print(sound_object.make_sound())
+
+def main():
+    dog = Dog()
+    cat = Cat()
+
+    # Both objects work because they implement make_sound()
+    process_sound(dog)  # Output: Woof!
+    process_sound(cat)  # Output: Meow!
+
+if __name__ == "__main__":
+    main()
